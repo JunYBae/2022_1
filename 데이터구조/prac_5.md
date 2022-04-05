@@ -206,3 +206,124 @@ int main(void) {
 	printf("%d", fibo(&q, n));
 }
 ```
+
+### 11번
+```
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_QUEUE_SIZE 10
+
+typedef char element;
+
+typedef struct {
+	element data[MAX_QUEUE_SIZE];
+	int front, rear;
+}Dequetype;
+
+void init_deque(Dequetype* s) {
+	s->front = s->rear = 0;
+}
+
+int is_empty(Dequetype* s) {
+	return s->front == s->rear;
+}
+
+int is_full(Dequetype* s) {
+	return (s->front == (s->rear + 1) % MAX_QUEUE_SIZE);
+}
+
+void deque_print(Dequetype* s) {
+	printf("DEQUE(front=%d rear=%d) = ", s->front, s->rear);
+	if (!is_empty(s)) {
+		int i = s->front;
+		do {
+			i = (i + 1) % MAX_QUEUE_SIZE;
+			printf("%c | ", s->data[i]);
+			if (i == s->rear)
+				break;
+		} while (i != s->front);
+	}
+	printf("\n");
+}
+
+void add_rear(Dequetype* s, element item) {
+	if (!is_full(s)) {
+		s->rear = (s->rear + 1) % MAX_QUEUE_SIZE;
+		s->data[s->rear] = item;
+	}
+	else {
+		printf("덱 포화 상태\n");
+	}
+}
+
+void add_front(Dequetype* s, element item) {
+	if (!is_full(s)) {
+		s->data[s->front] = item;
+		s->front = (s->front - 1 + MAX_QUEUE_SIZE) % MAX_QUEUE_SIZE;
+	}
+	else {
+		printf("덱 포화 상태\n");
+	}
+}
+
+element delete_rear(Dequetype* s) {
+	if (is_empty(s)) {
+		printf("덱 공백 상태\n");
+		exit(1);
+	}
+	else {
+		element tmp = s->rear;
+		s->rear = (s->rear - 1 + MAX_QUEUE_SIZE) % MAX_QUEUE_SIZE;
+		return s->data[tmp];
+	}
+}
+
+element delete_front(Dequetype* s) {
+	if (is_empty(s)) {
+		printf("덱 공백 상태\n");
+		exit(1);
+	}
+	else {
+		s->front = (s->front + 1) % MAX_QUEUE_SIZE;
+		return s->data[s->front];
+	}
+}
+
+void check_pelindrome(char a[]) {
+	Dequetype q;
+	init_deque(&q);
+
+	int i = 0, j = 0;
+
+	while (a[i] != NULL) {
+		if ('a' <= a[i] && 'z' >= a[i]) {
+			add_rear(&q, a[i]);
+			j++;
+		}
+		else if ('A' <= a[i] && 'Z' >= a[i]) {
+			add_rear(&q, a[i] - ('A'- 'a'));
+			j++;
+		}
+		i++;
+	}
+
+	while (!(j == 0 || j == 1)) {
+		if (delete_front(&q) != delete_rear(&q)) {
+			printf("회문이 아닙니다.\n");
+			return;
+		}
+		j = j - 2;
+	}
+	printf("회문이 맞습니다.\n");
+	return;
+}
+
+int main(void) {
+	char I[20] = "mad@.,Am";
+	char T[20] = "rac.er";
+
+	check_pelindrome(I);
+	check_pelindrome(T);
+}
+```
