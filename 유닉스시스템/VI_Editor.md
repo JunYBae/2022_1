@@ -35,3 +35,17 @@ ctrl + f : 한 화면 아래로 올라감 [PnDn Key]
 ctrl + u : 반 화면 위로 올라감
 ctrl + d : 반 화면 아래로 내려감
 ```
+
+## 간단한 명령어
+```
+J  현재 행과 다음 행을 연결
+.  전에 수행했던 명령 반복 수행
+nG  n 라인 번호로 이동
+G   맨 끝 라인으로 이동
+:set nu 줄 번호 설정
+:set nonu 줄 번호 해제
+:set tabstop=4 탭 크기 설정
+:set autoindent 자동 인던트 설정
+:set noautoindent 자동 인던트 해제
+:set all 모든 설정 옵션 보여줌
+```
