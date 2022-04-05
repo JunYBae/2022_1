@@ -38,3 +38,14 @@ equeue
 circle queue : fornt = 3, rear = 6
 답: front = 3, rear = 6
 ```
+
+### 06번
+```
+(a) A추가
+circle queue = |  | B | C | A |  |
+(b) D추가
+circle queue = |  | B | C | A | D |
+(c) 삭제
+circle queue = |  |  | C | A | D |
+```
+
