@@ -68,3 +68,76 @@ push(A, pop(B)) A: top = 2 stack = a, b, c B: top = 0 stack = d
 pop(B)     // top = -1 stack = 
 ```
 
+### 10번
+```
+#include <stdio.h>
+#include <stdlib.h>
+typedef int element;
+#define MAX_SIZE 100
+
+typedef struct {
+	element source[MAX_SIZE];
+	int size;
+}Stack;
+
+void init_stack(Stack* s) {
+	s->size = -1;
+}
+
+int is_empty(Stack* s) {
+	return (s->size == -1);
+}
+
+int is_full(Stack* s) {
+	return (s->size == MAX_SIZE - 1);
+}
+
+void push(Stack* s, element item) {
+	if (is_full(s)) {
+		fprintf(stderr, "스택 포화 에러\n");
+		return;
+	}
+	else
+		s->source[++(s->size)] = item;
+}
+
+element pop(Stack* s) {
+	if (is_empty(s)) {
+		fprintf(stderr, "스택 공백 에러\n");
+		exit(1);
+	}
+	else
+		return s->source[(s->size)--];
+}
+
+element peek(Stack* s) {
+	if (is_empty(s)) {
+		fprintf(stderr, "스택 공백 에러\n");
+		exit(1);
+	}
+	else
+		return s->source[s->size];
+}
+
+int main() {
+	Stack stack_tmp;
+	init_stack(&stack_tmp);
+
+	int tmp, item_tmp;
+	printf("정수 배열의 크기: ");
+	scanf_s("%d", &tmp);
+
+	printf("정수를 입력하세요: ");
+	for (int i = 0; i < tmp; i++) {
+		scanf_s("%d", &item_tmp);
+		push(&stack_tmp, item_tmp);
+	}
+
+	printf("반전된 정수 배열 : ");
+	for (int i = 0; i < tmp; i++) {
+		printf("%d ", pop(&stack_tmp));
+	}
+
+	
+}
+```
