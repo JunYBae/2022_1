@@ -220,3 +220,93 @@ int main() {
 	
 }
 ```
+
+### 12번
+```
+#include <stdio.h>
+#include <stdlib.h>
+typedef char element;
+#define MAX_SIZE 100
+
+typedef struct {
+	element source[MAX_SIZE];
+	int size;
+}Stack;
+
+void init_stack(Stack* s) {
+	s->size = -1;
+}
+
+int is_empty(Stack* s) {
+	return (s->size == -1);
+}
+
+int is_full(Stack* s) {
+	return (s->size == MAX_SIZE - 1);
+}
+
+void push(Stack* s, element item) {
+	if (is_full(s)) {
+		fprintf(stderr, "스택 포화 에러\n");
+		return;
+	}
+	else
+		s->source[++(s->size)] = item;
+}
+
+element pop(Stack* s) {
+	if (is_empty(s)) {
+		fprintf(stderr, "스택 공백 에러\n");
+		exit(1);
+	}
+	else
+		return s->source[(s->size)--];
+}
+
+element peek(Stack* s) {
+	if (is_empty(s)) {
+		fprintf(stderr, "스택 공백 에러\n");
+		exit(1);
+	}
+	else
+		return s->source[s->size];
+}
+
+int main() {
+	Stack stack;
+	Stack print_stack;
+	init_stack(&stack);
+	init_stack(&print_stack);
+
+	char a[MAX_SIZE];
+	int i = 0, count = 1;
+
+	printf("문자열을 입력하시오: ");
+	scanf_s("%s", a, MAX_SIZE);
+
+	while (a[i] != NULL) {
+		char tmp = a[i];
+		count = 1;
+		while (a[i + 1] == tmp || tmp == a[i + 1] - ('A' - 'a') || tmp == a[i + 1] + ('A' - 'a')) {
+			count++;
+			i++;
+		}
+
+		push(&stack, count + '0');
+		
+		if (tmp >= 'a' && tmp <= 'z')
+			push(&stack, tmp);
+		else
+			push(&stack, tmp - ('A' - 'a'));
+		i++;
+	}
+
+	while (!is_empty(&stack)) 
+		push(&print_stack, pop(&stack));
+
+	printf("압축된 문자열: ");
+	while (!is_empty(&print_stack))
+		printf("%c", pop(&print_stack));
+	
+}
+```
