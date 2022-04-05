@@ -26,4 +26,17 @@ struct person {
 	float money;
 };
 ```
-### 6번
+### 06번
+```
+#include <stdio.h>
+
+typedef struct {
+	float real;
+	float imaginary;
+}complex;
+
+int main() {
+	complex c1, c2;
+}
+```
+
