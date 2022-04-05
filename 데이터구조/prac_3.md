@@ -65,3 +65,19 @@ int main() {
 }
 ```
 
+### 07번
+```
+#include <stdio.h>
+
+typedef struct {
+	float real;
+	float imaginary;
+}complex;
+
+int main() {
+	complex c1, c2;
+}
+```
+
+### 08번
+
