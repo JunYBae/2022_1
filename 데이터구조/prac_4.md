@@ -396,3 +396,86 @@ int main() {
 int is_size(Stack* s) {
 	return s->size + 1;
 }
+```
+
+### 15번
+```
+#include<stdio.h>
+#define MAX_SIZE 100
+#define MAZE_SIZE 6
+
+char maze[MAZE_SIZE][MAZE_SIZE] = {
+	{'1','1','1','1','1','1'},
+	{'e','0','1','0','0','1'},
+	{'1','0','0','0','1','1'},
+	{'1','0','1','0','1','1'},
+	{'1','0','1','0','0','x'},
+	{'1','1','1','1','1','1'},
+};
+
+typedef struct {
+	int row;
+	int com;
+}element;
+
+typedef struct {
+	element stack[MAX_SIZE];
+	int size;
+}Stack;
+
+void stack_init(Stack* s) {
+	s->size = -1;
+}
+
+void stack_push(Stack* s, int row, int com) {
+	if (row < 0 || row >= MAZE_SIZE || com < 0 || com >= MAZE_SIZE)
+		return;
+	if (maze[row][com] == '0' || maze[row][com] == 'x') {
+		s->stack[++(s->size)].row = row;
+		s->stack[(s->size)].com = com;
+	}
+}
+
+bool is_empty(Stack* s) {
+	return s->size == -1;
+}
+
+element stack_pop(Stack* s) {
+	element t = s->stack[s->size];
+	s->stack[s->size].row = 0;
+	s->stack[(s->size)--].com = 0;
+	return t;
+}
+
+int main() {
+	Stack s;
+	stack_init(&s);
+	element road[MAX_SIZE] = {};
+	element here = { 1,0 };
+	int i = 0, r, c;
+	while (maze[here.row][here.com] != 'x') {
+		r = here.row;
+		c = here.com;
+		maze[r][c] = '.';
+		road[i].row = r;
+		road[i++].com = c;
+
+		stack_push(&s, r + 1, c);
+		stack_push(&s, r - 1, c);
+		stack_push(&s, r, c + 1);
+		stack_push(&s, r, c - 1);
+
+		if (is_empty(&s)) {
+			printf("실패\n");
+			return 0;
+		}
+		else
+			here = stack_pop(&s);
+	}
+
+	for (int k = 0; k < i; k++)
+		printf("경로 : %d %d\n", road[k].row, road[k].com);
+}
+```
+
+### 16번
