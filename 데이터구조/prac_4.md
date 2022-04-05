@@ -393,6 +393,6 @@ int main() {
 
 ### 14번
 ```
-is_size(Stack* s) {
-	return s->size;
+int is_size(Stack* s) {
+	return s->size + 1;
 }
