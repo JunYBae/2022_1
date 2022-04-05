@@ -15,3 +15,15 @@ int main() {
 	print(a);
 }
 ```
+### 05번
+```
+#include <stdio.h>
+#include <math.h>
+
+struct person {
+	char name[20];
+	int age;
+	float money;
+};
+```
+### 6번
