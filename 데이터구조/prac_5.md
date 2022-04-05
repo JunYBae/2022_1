@@ -49,3 +49,8 @@ circle queue = |  | B | C | A | D |
 circle queue = |  |  | C | A | D |
 ```
 
+### 07번
+큐 항목 삽입 삭제 시간 복잡도는 ?
+```
+답: O(1)
+```
