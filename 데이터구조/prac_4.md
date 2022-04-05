@@ -36,3 +36,23 @@ top은 배열 원소의 위치를 말하기 때문에
 스택 포화 상태  : top == MAX_STACK_SIZE - 1
 ```
 
+### 06번
+```
+O(1)
+```
+
+### 07번
+```
+B+E
+```
+
+### 08번
+```
+push(A, 1)  // top = 0 stack = 1
+push(A, 2)  // top = 1 stack = 1, 2
+push(A, 3)  // top = 2 stack = 1, 2, 3
+pop(A)      // top = 1 stack = 1, 2
+push(A, 4)  // top = 2 stack = 1, 2, 4
+push(A, 5)  // top = 3 stack = 1, 2, 4, 5
+pop(A)      // top = 2 stack = 1, 2, 4
+```
