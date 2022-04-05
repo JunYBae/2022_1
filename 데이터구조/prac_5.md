@@ -50,7 +50,18 @@ circle queue = |  |  | C | A | D |
 ```
 
 ### 07번
-큐 항목 삽입 삭제 시간 복잡도는 ?
+큐 항목 삽입 삭제 시간 복잡도는?
 ```
 답: O(1)
+```
+
+### 08번
+원형큐에 큐에 존재하는 요소의 개수 반환하는 get_count 추가
+```
+int get_count(Queue* s) {
+	if (s->front <= s->rear)
+		return s->rear - s->front;
+	else
+		return MAX_SIZE - (s->front - s->rear);     //ex)front = 3, rear = 1, size = 5;
+}
 ```
