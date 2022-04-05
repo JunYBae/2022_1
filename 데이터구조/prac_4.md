@@ -141,3 +141,82 @@ int main() {
 	
 }
 ```
+
+### 11번
+```
+#include <stdio.h>
+#include <stdlib.h>
+typedef char element;
+#define MAX_SIZE 100
+
+typedef struct {
+	element source[MAX_SIZE];
+	int size;
+}Stack;
+
+void init_stack(Stack* s) {
+	s->size = -1;
+}
+
+int is_empty(Stack* s) {
+	return (s->size == -1);
+}
+
+int is_full(Stack* s) {
+	return (s->size == MAX_SIZE - 1);
+}
+
+void push(Stack* s, element item) {
+	if (is_full(s)) {
+		fprintf(stderr, "스택 포화 에러\n");
+		return;
+	}
+	else
+		s->source[++(s->size)] = item;
+}
+
+element pop(Stack* s) {
+	if (is_empty(s)) {
+		fprintf(stderr, "스택 공백 에러\n");
+		exit(1);
+	}
+	else
+		return s->source[(s->size)--];
+}
+
+element peek(Stack* s) {
+	if (is_empty(s)) {
+		fprintf(stderr, "스택 공백 에러\n");
+		exit(1);
+	}
+	else
+		return s->source[s->size];
+}
+
+int main() {
+	Stack stack;
+	init_stack(&stack);
+
+	char a[100];
+	int i = 0, count = 1;
+
+	printf("수식: ");
+	scanf_s("%s", a, 100);
+
+	while (a[i] != NULL) {
+		
+		
+		if (a[i] == '(') {
+			push(&stack, count);
+			printf("%d ", count);
+			count++;
+		}
+
+		else {
+			printf("%d ",pop(&stack));
+		}
+		i++;
+	}
+	
+}
+```
