@@ -56,3 +56,15 @@ push(A, 4)  // top = 2 stack = 1, 2, 4
 push(A, 5)  // top = 3 stack = 1, 2, 4, 5
 pop(A)      // top = 2 stack = 1, 2, 4
 ```
+
+### 09번
+```
+push(A, a) // top = 0 stack = a
+push(A, b) // top = 1 stack = a, b
+push(A, c) // top = 2 stack = a, b, c
+push(B, d) // top = 0 stack = d
+push(B, pop(A)) A: top = 1 stack = a, b  B: top = 1 stack = d, c
+push(A, pop(B)) A: top = 2 stack = a, b, c B: top = 0 stack = d
+pop(B)     // top = -1 stack = 
+```
+
