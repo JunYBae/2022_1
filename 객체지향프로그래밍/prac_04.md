@@ -233,5 +233,89 @@ int main() {
 
 ### 08번
 ```
+#include <iostream>
+#include <string>
+#include <stdlib.h>
+#include <time.h>
+using namespace std;
 
+class Circle {
+	int radius;
+public:
+	void setRadius(int radius) { this->radius = radius; }
+	double getArea() { return 3.14 * radius * radius; }
+};
+
+int main() {
+	int size;
+	cout << "원의 개수 >> ";
+	cin >> size;
+
+	Circle* p = new Circle[size];
+
+	int tmp;
+	for (int i = 0; i < size; i++) {
+		cout << "원 " << i + 1 << "의 반지름 >> ";
+		cin >> tmp;
+		p[i].setRadius(tmp);
+	}
+
+	tmp = 0;
+
+	for (int i = 0; i < size; i++) {
+		if (p[i].getArea() > 100)
+			tmp++;
+	}
+	cout << "면적이 100보다 큰 원은 " << tmp << "개 입니다";
+}
+```
+
+### 09번
+```
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Person {
+	string name;
+	string tel;
+public:
+	Person() { }
+	string getName() { return name; }
+	string getTel() { return tel;  }
+	void set(string name, string tel);
+};
+
+void Person::set(string name, string tel) {
+	this->name = name;
+	this->tel = tel;
+}
+
+int main() {
+	cout << "이름과 전화 번호를 입력해 주세요 \n";
+
+	string n, t;
+	Person persons[3];
+
+	for (int i = 0; i < 3; i++) {
+		cout << "사람 " << i + 1 << ">> ";
+		cin >> n >> t;
+		persons[i].set(n, t);
+	}
+
+	cout << "모든 사람의 이름은 ";
+	for (int i = 0; i < 3; i++) {
+		cout << persons[i].getName() << " ";
+	}
+	cout << endl;
+
+	cout << "전화번호 검색합니다. 이름을 입력하세요>>";
+	cin >> n;
+
+	for (int i = 0; i < 3; i++) {
+		if (persons[i].getName().compare(n) == 0) {
+			cout << "전화 번호는 " << persons[i].getTel();
+		}
+	}
+}
 ```
