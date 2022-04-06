@@ -13,12 +13,11 @@ A/D converter = 아날로그 -> 디지털
 D/A converter = 디지털 -> 아날로그
 
 ## 디지털 정보의 단위
-```
 1nibble = 4bit
 1byte   = 8bit
 1byte   = 1 character
 영어는 1byte, 한글은 2byte
 [MSB = 최상위비트, LSB = 최하위비트]
-```
+
 
 
