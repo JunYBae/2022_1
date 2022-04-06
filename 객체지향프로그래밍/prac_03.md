@@ -99,5 +99,55 @@ int main() {
 
 ### 03번
 ```
+#include <iostream>
+#include <string>
+#include <cstring>
+using namespace std;
+
+class Account {
+	string name;
+	int id;
+	int money;
+public:
+	Account(string n, int i, int m);
+	void deposit(int add);
+	int withdraw(int odd);
+	string getOwner();
+	int inquiry();
+};
+
+Account::Account(string n, int i, int m) :name(n), id(i), money(m) {
+	
+}
+
+void Account::deposit(int add) {
+	money += add;
+}
+
+int Account::withdraw(int odd) {
+	money -= odd;
+	return odd;
+}
+
+string Account::getOwner() {
+	return name;
+}
+
+int Account::inquiry() {
+	return money;
+}
+
+int main() {
+	Account a("kitae", 1, 5000);
+	a.deposit(50000);
+	cout << a.getOwner() << "의 잔액은 " << a.inquiry() << endl;
+	int money = a.withdraw(20000);
+	cout << a.getOwner() << "의 잔액은 " << a.inquiry() << endl;
+	return 0;
+}
+```
+
+### 04번
+```
 
 ```
