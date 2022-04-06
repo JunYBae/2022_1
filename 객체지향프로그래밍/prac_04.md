@@ -166,5 +166,72 @@ int main() {
 
 ### 06번
 ```
+#include <iostream>
+#include <string>
+#include <stdlib.h>
+#include <time.h>
+using namespace std;
+
+
+
+int main() {
+	string str;
+	cout << "아래에 한줄을 입력하세요.(exit를 입력하면 종료합니다)\n";
+
+	while (true) {
+		cout << ">>";
+		getline(cin, str);
+		if (str.compare("exit") == 0)
+			break;
+
+		srand((unsigned)time(0));
+		int n = rand() % str.length();
+
+		srand((unsigned)time(0));
+		char c = 'a' + rand() % 26;
+
+		str[n] = c;
+		cout << str << endl;
+
+	}
+}
+```
+
+### 07번
+```
+#include <iostream>
+#include <string>
+#include <stdlib.h>
+#include <time.h>
+using namespace std;
+
+class Circle {
+	int radius;
+public:
+	void setRadius(int radius) { this->radius = radius; }
+	double getArea() { return 3.14 * radius * radius; }
+};
+
+int main() {
+	Circle p[3];
+	int tmp;
+	for (int i = 0; i < 3; i++) {
+		cout << "원 " << i + 1 << "의 반지름 >> ";
+		cin >> tmp;
+		p[i].setRadius(tmp);
+	}
+
+	tmp = 0;
+
+	for (int i = 0; i < 3; i++) {
+		if (p[i].getArea() > 100)
+			tmp++;
+	}
+	cout << "면적이 100보다 큰 원은 " << tmp << "개 입니다";
+}
+```
+
+### 08번
+```
 
 ```
