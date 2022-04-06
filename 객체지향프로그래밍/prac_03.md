@@ -307,3 +307,66 @@ int main() {
 	return 0;
 }
 ```
+
+### 08번
+```
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Integer {
+	int num;
+public:
+	Integer(int n) : num(n) { }
+	Integer(string n) : num(stoi(n)) { }
+	int get() { return num; }
+	void set(int n) { num = n; }
+	bool isEven() { return ((num%2==0) ? true : false); }
+};
+
+int main() {
+	Integer n(30);
+	cout << n.get() << ' ';
+	n.set(50);
+	cout << n.get() << ' ';
+
+	Integer m("300");
+	cout << m.get() << ' ';
+	cout << m.isEven();
+
+	return 0;
+}
+```
+
+### 09번
+```
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Oval {
+	int width, height;
+public:
+	Oval() { width = height = 1; }
+	Oval(int w, int h) { width = w; height = h; }
+	~Oval() { cout << "너비: " << width << " 높이: " << height << endl; }
+	int getWidth() { return width; }
+	int getHeight() { return height; }
+	void set(int w, int h) { width = w; height = h; }
+	void show() { cout << "너비: " << width << " 높이: " << height << endl; }
+};
+
+int main() {
+	Oval a, b(3, 4);
+	a.set(10, 20);
+	a.show();
+	cout << b.getWidth() << "," << b.getHeight() << endl;
+
+	return 0;
+}
+```
+
+### 10번
+```
+
+```
