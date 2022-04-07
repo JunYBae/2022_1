@@ -379,5 +379,89 @@ int main() {
 
 ### 11번
 ```
+#include <iostream>
+#include <string>
+using namespace std;
 
+class CoffeeVendingMachine {
+	Container tong[3];
+	void fill();
+	void selectEspresso();
+	void selectAmericano();
+	void selectSugarCoffee();
+	void show();
+public:
+	void run();
+};
+
+void CoffeeVendingMachine::fill() {
+	tong[0].fill(); tong[1].fill(); tong[2].fill();
+}
+
+void CoffeeVendingMachine::selectEspresso() {
+	tong[0].consume(); 
+	tong[1].consume();
+}
+
+void CoffeeVendingMachine::selectAmericano() {
+	tong[0].consume();
+	tong[1].consume(); tong[1].consume();
+}
+
+void CoffeeVendingMachine::selectSugarCoffee() {
+	tong[0].consume();
+	tong[1].consume(); tong[1].consume();
+	tong[2].cousume();
+}
+
+void CoffeeVendingMachine::show() {
+	cout << "커피 " << tong[0].getSize() << ", 물 " << tong[1].getSize()
+		<< ", 설탕 " << tong[2].getSize() << endl;
+}
+
+void CoffeeVendingMachine::run() {
+	cout << "***** 커피자판기를 작동합니다. *****" << endl;
+	while (1) {
+		int count;
+		cout << "메뉴를 눌러주세요(1:에스프레소, 2:아메리카노, 3:설탕커피, 4:잔량보기, 5:채우기)>> ";
+		cin >> count;
+		switch (count) {
+		case 1: 
+			selectEspresso();
+			break;
+		case 2:
+			selectAmericano();
+			break;
+		case 3:
+			selectSugarCoffee();
+			break;
+		case 4:
+			show();
+			break;
+		case 5:
+			fill();
+			break;
+			
+		}
+	}
+}
+
+class Container {
+	int size;
+public:
+	Container() { size = 10; }
+	void fill() { size = 10; }
+	void consume() { size -= 1; }
+	int getSize() { return size; }
+};
+
+int main() {
+	Family* simpson = new Family("Simpson", 3);
+	simpson->setName(0, "Mr.Simpson");
+	simpson->setName(1, "Mrs.Simpson");
+	simpson->setName(2, "Bart Simpson");
+	simpson->show();
+	delete simpson;
+	return 0;
+}
 ```
