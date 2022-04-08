@@ -330,3 +330,70 @@ int main() {
 }
 ```
 
+### 11번
+(1)
+```
+#define _CRT_SECURE_NO_WARINGS
+#include <cstring>
+#include <iostream>
+using namespace std;
+
+class Book {
+	char* title;
+	int price;
+public:
+	Book(const char* title, int price);
+	~Book();
+	Book(const Book& book);
+	void set(const char* title, int price);
+	void show() { cout << title << ' ' << price << "원" << endl; }
+};
+
+Book::Book(const Book& book) {
+	this->price = book.price;
+	int size = strlen(book.title) + 1;
+	this->title = new char[size];
+	strcpy_s(this->title, size, book.title);
+}
+
+Book::Book(const char* title, int price) {
+	this->price = price;
+	int size = strlen(title) + 1;
+	this->title = new char[size];
+	strcpy_s(this->title, size, title);
+}
+
+void Book::set(const char* title, int price) {
+	if (this->title != NULL)
+		delete[] this->title;
+	this->price = price;
+	int size = strlen(title) + 1;
+	this->title = new char[size];
+	strcpy_s(this->title, size, title);
+	
+}
+
+Book::~Book() {
+	free(title);
+}
+
+int main() {
+	Book cpp("명품C++", 10000);
+	Book java = cpp;
+	java.set("명품자바", 12000);
+	cpp.show();
+	java.show();
+
+	return 0;
+}
+```
+
+(2)
+
+Book(cosnt Book& b) {
+	this->price = b.price;
+	this->title = b.title;
+}
+
+(3)
+
