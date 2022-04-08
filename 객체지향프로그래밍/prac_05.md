@@ -331,7 +331,7 @@ int main() {
 ```
 
 ### 11번
-(1)
+(1), (3)
 ```
 #define _CRT_SECURE_NO_WARINGS
 #include <cstring>
@@ -395,5 +395,5 @@ Book(cosnt Book& b) {
 	this->title = b.title;
 }
 
-(3)
+(4)
 
