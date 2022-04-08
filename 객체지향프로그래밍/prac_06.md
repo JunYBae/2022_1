@@ -341,5 +341,85 @@ int main() {
 
 ### 08번
 ```
+#include <iostream>
+using namespace std;
 
+class Trace {
+public:
+	static string a[100][2];
+	static int index;
+	static void put(string call, string text) {
+		a[index][0] = call;
+		a[index++][1] = text;
+	}
+	static void print(string call = "") {
+		if (call.compare("") == 0) {
+			cout << "----- 모든 Trace 정보를 출력합니다. -----" << endl;
+			for (int i = 0; i < index; i++)
+				cout << a[i][0] << ":" << a[i][1] << endl;
+		}
+		else {
+			cout << "----- " << call << "태그의 정보를 출력합니다. -----" << endl;
+			for (int i = 0; i < index; i++) {
+				if (a[i][0].compare(call) == 0)
+					cout << a[i][0] << ":" << a[i][1] << endl;;
+			}
+		}
+	}
+
+};
+
+int Trace::index = 0;
+string Trace::a[100][2] = { "" };
+
+void f() {
+	int a, b, c;
+	cout << "두 개의 정수를 입력하세요>>";
+	cin >> a >> b;
+	Trace::put("f()", "정수를 입력 받았음");
+	c = a + b;
+	Trace::put("f()", "합 계산");
+	cout << "합은 " << c << endl;
+}
+
+int main() {
+	Trace::put("main()", "프로그램 시작합니다");
+	f();
+
+	Trace::put("main()", "종료");
+	Trace::print("f()");
+	Trace::print();
+	return 0;
+}
+```
+
+### 09번
+```
+#include <iostream>
+using namespace std;
+
+class Board {
+public:
+	static string* notices;
+	static int index;
+	static void add(string text) { notices[index++] = text; }
+	static void print() {
+		cout << "******** 게시판입니다. ********" << endl;
+		for (int i = 0; i < index; i++)
+			cout << i << ": " << notices[i] << endl;
+		cout << endl;
+	}
+};
+
+string* Board::notices = new string[100];
+int Board::index = 0;
+
+int main() {
+	Board::add("중간고사는 감독 없는 자율 시험입니다.");
+	Board::add("코딩 라운지 많이 이용해 주세요.");
+	Board::print();
+	Board::add("진소린 학생이 경진대회 입상하였습니다. 축하해주세요");
+	Board::print();
+	return 0;
+}
 ```
