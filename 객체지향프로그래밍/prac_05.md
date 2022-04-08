@@ -278,6 +278,55 @@ int main() {
 
 ### 09번
 ```
+#include <iostream>
+using namespace std;
 
+class Accumulator {
+	int value;
+public:
+	Accumulator(int value) { this->value = value; }
+	Accumulator& add(int n) {
+		this->value += n;
+		return *this;
+	}
+	int get() { return value; }
+};
+
+int main() {
+	Accumulator acc(10);
+	acc.add(5).add(6).add(7);
+	cout << acc.get();
+
+	return 0;
+}
+```
+
+### 10번
+```
+#include <iostream>
+using namespace std;
+
+class Buffer {
+	string text;
+public:
+	Buffer(string text) { this->text = text; }
+	void add(string next) { text += next; }
+	void print() { cout << text << endl; }
+};
+
+
+Buffer& append(Buffer& buf, string text) {
+	buf.add(text);
+	return buf;
+}
+
+int main() {
+	Buffer buf("Hello");
+	Buffer& temp = append(buf, "Guys");
+	temp.print();
+	buf.print();
+
+	return 0;
+}
 ```
 
