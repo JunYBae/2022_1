@@ -137,6 +137,42 @@ int main() {
 ### 03번
 (1)
 ```
+int big(int a, int b) {
+	return (a > b ? a : b) < 100 ? (a > b ? a : b) : 100;
+}
+
+int big(int a, int b, int c) {
+	return (a > b ? a : b) < c ? (a > b ? a : b) : c;
+}
+
+int main() {
+	int x = big(3, 5);
+	int y = big(300, 60);
+	int z = big(30, 60, 50);
+	cout << x << ' ' << y << ' ' << z << endl;
+	return 0;
+}
+```
+(2)
+```
+#include <iostream>
+using namespace std;
+
+int big(int a, int b, int c = 100) {
+	return (a > b ? a : b) < c ? (a > b ? a : b) : c;
+}
+
+int main() {
+	int x = big(3, 5);
+	int y = big(300, 60);
+	int z = big(30, 60, 50);
+	cout << x << ' ' << y << ' ' << z << endl;
+	return 0;
+}
+```
+
+### 04번
+```
 
 ```
 
