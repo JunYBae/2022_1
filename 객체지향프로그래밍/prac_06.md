@@ -229,5 +229,117 @@ int main() {
 
 ### 06번
 ```
+#include <iostream>
+using namespace std;
+
+class ArrayUtility2{
+public:
+	static int* concat(int x[], int y[], int size) {
+		int* tmp = new int[size];
+		int count = 0;
+		for (int i = 0; i < size / 2; i++) {
+			tmp[count++] = x[i];
+		}
+
+		for (int i = 0; i < size / 2; i++) {
+			tmp[count++] = y[i];
+		}
+		return tmp;
+	}
+	static int* remove(int x[], int y[], int size, int& retsize) {
+		int* tmp = new int[size];
+		int cnt = 0;
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				if (x[i] == y[j])
+					break;
+				if (j == size - 1)
+					tmp[cnt++] = x[i];
+			}
+		}
+		retsize = cnt;
+		return tmp;
+	}
+};
+
+int main() {
+	int x[5], y[5], retSize;
+	int* z, * w;
+
+	cout << "정수를 5개 입력하라. 배열 x에 삽입한다>>";
+	for (int i = 0; i < 5; i++) {
+		cin >> x[i];
+	}
+	cout << "정수를 5개 입력하라. 배열 y에 삽입한다>>";
+	for (int i = 0; i < 5; i++) {
+		cin >> y[i];
+	}
+	z = ArrayUtility2::concat(x, y, 10);
+	cout << "합친 배열 정수 배열을 출력한다\n";
+	for (int i = 0; i < 10; i++)
+		cout << z[i] << " ";
+	cout << endl;
+
+	w = ArrayUtility2::remove(x, y, 5, retSize);
+	cout << "배열 x[]에서 y[]를 뺀 결과를 출력한다. 개수는 " << retSize << endl;
+	for (int i = 0; i < retSize; i++) {
+		cout << w[i] << " ";
+	}
+	return 0;
+}
+```
+
+### 07번
+```
+#include <iostream>
+using namespace std;
+
+class Random {
+public:
+	static void seed() { srand((unsigned)time(0)); }
+	static int nextInt(int min = 0, int max = 32767);
+	static char nextAlphabet();
+	static double nextDouble();
+};
+
+int Random::nextInt(int min, int max) {
+	return rand() % (max - min) + min;
+}
+
+char Random::nextAlphabet() {
+	if (rand() % 2 == 0)
+		return rand() % 26 + 'a';
+	else
+		return rand() % 26 + 'A';
+}
+
+double Random::nextDouble() {
+	return (double)rand() / RAND_MAX;
+}
+
+int main() {
+	cout << "1에서 100까지 랜덤한 정수 10개를 출력합니다" << endl;
+	for (int i = 0; i < 10; i++) {
+		cout << Random::nextInt(1, 100) << ' ';
+	}
+	cout << endl;
+
+	cout << "알파벳을 랜덤하게 10개 출력합니다" << endl;
+	for (int i = 0; i < 10; i++) {
+		cout << Random::nextAlphabet() << ' ';
+	}
+	cout << endl;
+
+	cout << "랜덤한 실수 10개를 출력합니다" << endl;
+	for (int i = 0; i < 10; i++) {
+		cout << Random::nextDouble() << ' ';
+	}
+	cout << endl;
+	return 0;
+}
+```
+
+### 08번
+```
 
 ```
