@@ -302,3 +302,65 @@ int main() {
 	printf("연결 리스트의 데이터 합 : %d\n", print_sum(head));
 }
 ```
+
+### 12번
+```
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int element;
+
+typedef struct ListNode {
+	element data;
+	struct ListNode* link;
+}ListNode;
+
+ListNode* insert_first(ListNode* head, element value)
+{
+	ListNode* p = (ListNode*)malloc(sizeof(ListNode));
+	p->data = value;
+	p->link = head;
+	head = p;
+	return head;
+}
+
+void print_list(ListNode* head)
+{
+	ListNode* p = head;
+	for (p = head; p->link != NULL; p = p->link)
+	{
+		printf("%d->", p->data);
+	}
+	printf("%d", p->data);
+
+}
+
+int print_count(ListNode* head, element value)
+{
+	ListNode* p = head;
+	int count = 0;
+	for (p = head; p != NULL; p = p->link)
+		if (p->data == value)
+			count++;
+
+	return count;
+}
+
+
+
+int main() {
+	ListNode* head = NULL;
+	int count, value;
+	printf("노드의 개수 : ");
+	scanf_s("%d", &count);
+	for (int i = 0; i < count; i++) {
+		printf("노드 #%d 데이터 : ", i + 1);
+		scanf_s("%d", &value);
+		head = insert_first(head, value);
+	}
+
+	printf("탐색할 값을 입력하시오: ");
+	scanf_s("%d", &value);
+	printf("%d는 연결 리스트에서 %d번 나타납니다.\n", value, print_count(head, value));
+}
+```
