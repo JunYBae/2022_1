@@ -442,3 +442,35 @@ void max_min(ListNode* head)
 	printf("최대 값 : %d, 최소 값: %d\n", max, min);
 }
 ```
+
+### 16번
+```
+```
+
+### 17번
+```
+void print_list(ListNode* head)
+{
+	ListNode* p = head;
+	for (p = head; p != NULL; p = p->link)
+	{
+		printf("%d->", p->data);
+	}
+
+}
+
+ListNode* alternate(ListNode* head, ListNode* head2, ListNode* r) {
+	while (head || head2) {
+		if (head != NULL) {
+			r = add(r, head->data);
+			head = head->link;
+		}
+		if( head2 != NULL) {
+			r = add(r, head2->data);
+			head2 = head2->link;
+		}
+	}
+
+	return r;
+}
+```
