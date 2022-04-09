@@ -364,3 +364,65 @@ int main() {
 	printf("%d는 연결 리스트에서 %d번 나타납니다.\n", value, print_count(head, value));
 }
 ```
+
+### 13번
+```
+```
+
+### 14번
+```
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct element {
+	char name[20];
+	int age;
+	double height;
+}element;
+
+
+typedef struct ListNode {
+	element data;
+	struct ListNode* link;
+}ListNode;
+
+
+
+ListNode* insert_first(ListNode* head, element value)
+{
+	ListNode* p = (ListNode*)malloc(sizeof(ListNode));
+	p->data = value;
+	p->link = head;
+	head = p;
+	return head;
+}
+
+void print_list(ListNode* head)
+{
+	ListNode* p = head;
+	for (p = head; p != NULL; p = p->link)
+	{
+		printf("Name : %s\n", p->data.name);
+		printf("Age  : %d\n", p->data.age);
+		printf("Heigh: %lf\n", p->data.height);
+		printf("\n");
+	}
+
+}
+
+int main() {
+	ListNode* head = NULL;
+	element h1 = { "kim", 34, 1.7 };
+	element h2 = { "park", 27, 1.2 };
+	element h3 = { "lee", 48, 1.4 };
+	element h4 = { "choi", 30, 1.3 };
+
+	head = insert_first(head, h1);
+	head = insert_first(head, h2);
+	head = insert_first(head, h3);
+	head = insert_first(head, h4);
+	print_list(head);
+	return 0;
+}
+```
