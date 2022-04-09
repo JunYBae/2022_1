@@ -426,3 +426,19 @@ int main() {
 	return 0;
 }
 ```
+
+### 15번
+```
+void max_min(ListNode* head)
+{
+	int max = INT_MIN, min = INT_MAX;
+	ListNode* p = head;
+	while (p != NULL)
+	{
+		if (max < p->data) max = p->data;
+		if (min > p->data) min = p->data;
+		p = p->link;
+	}
+	printf("최대 값 : %d, 최소 값: %d\n", max, min);
+}
+```
