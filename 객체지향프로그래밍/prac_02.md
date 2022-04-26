@@ -158,7 +158,21 @@ int main() {
 
 ### 10번
 ```
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cstring>
+using namespace std;
 
+int main() {
+	char name[100];
+	cin.getline(name, 100);
+	for (int i = 0; i < strlen(name); i++) {
+		for (int k = 0; k <= i; k++) {
+			cout << name[k];
+		}
+		cout << endl;
+	}
+}
 ```
 
 ### 11번
@@ -177,4 +191,9 @@ int main() {
 		sum += k;
 	cout << sum;
 }
+```
+
+### 12번
+```
+
 ```
