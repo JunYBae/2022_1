@@ -282,3 +282,79 @@ int main() {
     }
 }
 ```
+### 15번
+```
+#include<iostream>
+#include<cstring>
+#include<cstdlib>
+using namespace std;
+ 
+int main(){
+    
+    char sic[100];
+    char *symbol;
+    
+    int front,rear;
+    
+    while(true){
+        cout << "? ";
+        cin.getline(sic,100);
+        front = atoi(strtok(sic, " "));
+        symbol = strtok(NULL, " ");
+        rear = atoi(strtok(NULL, " "));
+        
+        if(*symbol == '+'){
+            cout << front << " + " << rear << " = " << front+rear << endl;
+        }
+        else if(*symbol == '-'){
+            cout << front << " - " << rear << " = " << front-rear << endl;
+        }
+        else if(*symbol == '*'){
+            cout << front << " * " << rear << " = " << front*rear << endl;
+        }
+        else if(*symbol == '/'){
+            cout << front << " / " << rear << " = " << front/rear << endl;
+        }
+        else if(*symbol == '%'){
+            cout << front << " % " << rear << " = " << front%rear << endl;
+        }
+    } 
+    return 0; 
+}
+```
+
+### 16번
+```
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+int main() {
+	char str[10000];
+	int alphabet[27] = { 0 };
+	int tot = 0;
+
+	cout << "영문 텍스트를 입력하세요. 히스토그램을 그립니다. 텍스트의 끝은 ;입니다. 10000개까지 가능합니다.\n";
+	cin.getline(str, 10000, ';');
+	
+	for (int i = 0; i < strlen(str); i++) {
+		if (isalpha(str[i])) {
+			if (str[i] >= 'A' && str[i] <= 'Z') 
+				str[i] = tolower(str[i]);
+			tot++;
+			alphabet[str[i] - 'a']++;
+		}
+	}
+
+	cout << "총 알파벳 수 " << tot << endl << endl;
+	for (int i = 0; i < 26; i++) {
+		cout << (char)(i + 'a') << "(" << alphabet[i] << ")";
+		cout << "\t: ";
+		for (int j = 1; j <= alphabet[i]; j++)
+			cout << '*';
+		cout << endl;
+	}
+	
+}
+```
