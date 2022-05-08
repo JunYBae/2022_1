@@ -87,3 +87,111 @@ int main() {
 }
 ```
 
+### 2-1번
+```
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Book {
+	string title;
+	int price, pages;
+public:
+	Book(string title = "", int price = 0, int pages = 0) {
+		this->title = title;
+		this->price = price;
+		this->pages = pages;
+	}
+	void show() {
+		cout << title << ' ' << price << "원 " << pages << " 페이지" << endl;
+	}
+	string getTitle() 
+	{
+		return title; 
+	}
+
+	bool operator== (int p) {
+		if (this->price == p) return true;
+		else return false;
+	}
+
+	bool operator== (string p) {
+		if (this->title == p) return true;
+		else return false;
+	}
+
+	bool operator== (Book p) {
+		if ((title == p.title) && (price == p.price) && (pages == p.pages))
+			return true;
+		else
+			return false;
+	}
+};
+
+
+int main() {
+	Book a("명품 C++", 30000, 500), b("고품 C++", 30000, 500);
+	if (a == 30000) cout << "정가 30000원" << endl;
+	if (a == "명품 C++") cout << "명품 C++ 입니다." << endl;
+	if (a == b) cout << "두 책이 같은 책입니다." << endl;
+}
+```
+
+### 2-2번
+```
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Book {
+	string title;
+	int price, pages;
+public:
+	Book(string title = "", int price = 0, int pages = 0) {
+		this->title = title;
+		this->price = price;
+		this->pages = pages;
+	}
+	void show() {
+		cout << title << ' ' << price << "원 " << pages << " 페이지" << endl;
+	}
+	string getTitle() 
+	{
+		return title; 
+	}
+
+	friend bool operator== (Book b, int p);
+	friend bool operator== (Book b, string p);
+	friend bool operator== (Book b, Book p);
+};
+
+bool operator== (Book b, int p) {
+	if (b.price == p) return true;
+	else return false;
+}
+
+bool operator== (Book b, string p) {
+	if (b.title == p) return true;
+	else return false;
+}
+
+bool operator== (Book b, Book p) {
+	if ((b.title == p.title) && (b.price == p.price) && (b.pages == p.pages))
+		return true;
+	else
+		return false;
+}
+
+
+int main() {
+	Book a("명품 C++", 30000, 500), b("고품 C++", 30000, 500);
+	if (a == 30000) cout << "정가 30000원" << endl;
+	if (a == "명품 C++") cout << "명품 C++ 입니다." << endl;
+	if (a == b) cout << "두 책이 같은 책입니다." << endl;
+}
+```
+
+### 3번
+```
+
+```
