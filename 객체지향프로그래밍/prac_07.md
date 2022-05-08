@@ -370,10 +370,122 @@ int main() {
 
 ### 6-1번
 ```
+#include <iostream>
+#include <string>
+using namespace std;
 
+class Matrix {
+	int m[2][2];
+public:
+	Matrix() : Matrix(0, 0, 0, 0) {}
+	Matrix(int m1, int m2, int m3, int m4) {
+		m[0][0] = m1;	m[0][1] = m2;
+		m[1][0] = m3;	m[1][1] = m4;
+	}
+	void show() {
+		cout << "Matrix = { ";
+		for (int i = 0; i < 2; i++)
+			for (int j = 0; j < 2; j++)
+				cout << m[i][j] << ' ';
+		cout << "}" << endl;
+	}
+
+	Matrix operator+ (Matrix m);
+	Matrix& operator+= (Matrix m);
+	bool operator== (Matrix m);
+};
+
+Matrix Matrix::operator+ (Matrix m) {
+	Matrix tmp;
+	for (int i = 0; i < 2; i++)
+		for (int j = 0; j < 2; j++)
+			tmp.m[i][j] = this->m[i][j] + m.m[i][j];
+	return tmp;
+}
+
+Matrix& Matrix::operator+= (Matrix m) {
+	for (int i = 0; i < 2; i++)
+		for (int j = 0; j < 2; j++)
+			this->m[i][j] += m.m[i][j];
+	return *this;
+}
+
+bool Matrix::operator== (Matrix m) {
+	bool check = true;
+	for (int i = 0; i < 2; i++)
+		for (int j = 0; j < 2; j++)
+			if (this->m[i][j] != m.m[i][j])
+				check = false;
+	return check;
+}
+
+int main() {
+	Matrix a(1, 2, 3, 4), b(2, 3, 4, 5), c;
+	c = a + b;
+	a += b;
+	a.show(); b.show(); c.show();
+	if (a == c)
+		cout << "a and c are the same" << endl;
+}
 ```
 
 ### 6-2번
 ```
+#include <iostream>
+#include <string>
+using namespace std;
 
+class Matrix {
+	int m[2][2];
+public:
+	Matrix() : Matrix(0, 0, 0, 0) {}
+	Matrix(int m1, int m2, int m3, int m4) {
+		m[0][0] = m1;	m[0][1] = m2;
+		m[1][0] = m3;	m[1][1] = m4;
+	}
+	void show() {
+		cout << "Matrix = { ";
+		for (int i = 0; i < 2; i++)
+			for (int j = 0; j < 2; j++)
+				cout << m[i][j] << ' ';
+		cout << "}" << endl;
+	}
+
+	friend Matrix operator+ (Matrix m1, Matrix m2);
+	friend Matrix& operator+= (Matrix& m1, Matrix m2);
+	friend bool operator== (Matrix m1, Matrix m2);
+};
+
+Matrix operator+ (Matrix m1, Matrix m2) {
+	Matrix tmp;
+	for (int i = 0; i < 2; i++)
+		for (int j = 0; j < 2; j++)
+			tmp.m[i][j] = m1.m[i][j] + m2.m[i][j];
+	return tmp;
+}
+
+Matrix& operator+= (Matrix& m1, Matrix m2) {
+	for (int i = 0; i < 2; i++)
+		for (int j = 0; j < 2; j++)
+			m1.m[i][j] += m2.m[i][j];
+	return m1;
+}
+
+bool operator== (Matrix m1, Matrix m2) {
+	bool check = true;
+	for (int i = 0; i < 2; i++)
+		for (int j = 0; j < 2; j++)
+			if (m1.m[i][j] != m2.m[i][j])
+				check = false;
+	return check;
+}
+
+int main() {
+	Matrix a(1, 2, 3, 4), b(2, 3, 4, 5), c;
+	c = a + b;
+	a += b;
+	a.show(); b.show(); c.show();
+	if (a == c)
+		cout << "a and c are the same" << endl;
+}
 ```
