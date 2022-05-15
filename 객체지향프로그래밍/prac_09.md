@@ -264,4 +264,73 @@ int main() {
 }
 ```
 
-### 6
+### 6번
+```
+#include <iostream>
+#include <string>
+using namespace std;
+
+class AbstractStack {
+public:
+	virtual bool push(int n) = 0;
+	virtual bool pop(int& n) = 0;
+	virtual int size() = 0;
+};
+
+class IntStack : public AbstractStack {
+	int stack[5] = { 0 };
+	int tos = -1;
+public:
+	virtual bool push(int n) {
+		if (size() == 5) {
+			cout << "stack full " << endl;
+			return false;
+		}
+		stack[++tos] = n;
+		return true;
+	}
+	virtual bool pop(int& n) {
+		if (size() == 0) {
+			cout << "stack empty" << endl;
+			return false;
+		}
+		n = stack[tos--];
+		return true;
+	}
+	virtual int size() {
+		return tos + 1;
+	}
+	void show() {
+		cout << "| ";
+		for (int i = 0; i <= tos; i++) {
+			cout << stack[i] << ' ';
+		}
+		cout << "|" << endl;
+	}
+};
+
+int main() {
+	IntStack intStack;
+
+	intStack.push(1);
+	intStack.push(2);
+	intStack.push(3);
+	intStack.push(4);
+	intStack.push(5);
+	intStack.push(6);
+
+	intStack.show();
+
+	int n;
+	intStack.pop(n);
+	cout << n << " is popped" << endl;
+	intStack.show();
+
+	return 0;
+}
+```
+
+### 7번
+```
+
+```
