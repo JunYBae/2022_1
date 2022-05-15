@@ -44,5 +44,164 @@ int main() {
 
 ### 2번
 ```
+#include <iostream>
+#include <string>
+using namespace std;
 
+class Converter {
+protected:
+	double ratio;
+	virtual double convert(double src) = 0;
+	virtual string getSourceString() = 0;
+	virtual string getDestString() = 0;
+public:
+	Converter(double ratio) { this->ratio = ratio; }
+	void run() {
+		double src;
+		cout << getSourceString() << "을 " << getDestString() << " 로 바꿉니다. ";
+		cout << getSourceString() << "을 입력하세요>> ";
+		cin >> src;
+		cout << "변환 결과 : " << convert(src) << getDestString() << endl;
+	}
+};
+
+class KmToMile : public Converter {
+public:
+	KmToMile(double ratio) : Converter(ratio) {}
+	virtual string getSourceString() { return "KM"; }
+	virtual string getDestString() { return "Mile"; }
+	virtual double convert(double src) { return src / ratio; }
+};
+
+
+int main() {
+	KmToMile toMile(1.609344);
+	toMile.run();
+}
+```
+
+### 3번
+```
+#include <iostream>
+#include <string>
+using namespace std;
+
+class LoopAdder {
+	string name;
+	int x, y, sum;
+	void read();
+	void write();
+protected:
+	LoopAdder(string name = "") { this->name = name; }
+	int getX() { return x; }
+	int getY() { return y; }
+	virtual int calculate() = 0;
+public:
+	void run();
+};
+
+void LoopAdder::read() {
+	cout << name << ":" << endl;
+	cout << "처음 수에서 두번째 수까지 더합니다. 두 수를 입력하세요 >> ";
+	cin >> x >> y;
+}
+
+void LoopAdder::write() {
+	cout << x << "에서 " << y << "까지의 합 = " << sum << " 입니다. " << endl;
+}
+
+void LoopAdder::run() {
+	read();
+	sum = calculate();
+	write();
+}
+
+class ForLoopAdder : public LoopAdder {
+public:
+	ForLoopAdder(string name) : LoopAdder(name) { }
+	virtual int calculate() {
+		int tmp = 0;
+		for (int i = getX(); i <= getY(); i++)
+			tmp += i;
+		return tmp;
+	}
+};
+
+int main() {
+	ForLoopAdder forLoop("For Loop");
+	forLoop.run();
+}
+```
+
+### 4번
+```
+#include <iostream>
+#include <string>
+using namespace std;
+
+class LoopAdder {
+	string name;
+	int x, y, sum;
+	void read();
+	void write();
+protected:
+	LoopAdder(string name = "") { this->name = name; }
+	int getX() { return x; }
+	int getY() { return y; }
+	virtual int calculate() = 0;
+public:
+	void run();
+};
+
+void LoopAdder::read() {
+	cout << name << ":" << endl;
+	cout << "처음 수에서 두번째 수까지 더합니다. 두 수를 입력하세요 >> ";
+	cin >> x >> y;
+}
+
+void LoopAdder::write() {
+	cout << x << "에서 " << y << "까지의 합 = " << sum << " 입니다. " << endl;
+}
+
+void LoopAdder::run() {
+	read();
+	sum = calculate();
+	write();
+}
+
+class WhileLoopAdder : public LoopAdder {
+public:
+	WhileLoopAdder(string name) : LoopAdder(name) { }
+	virtual int calculate() {
+		int tmp = 0;
+		int i = getX();
+		while (i <= getY()) {
+			tmp += i;
+			i++;
+		}
+		return tmp;
+	}
+};
+
+class DoWhileLoopAdder : public LoopAdder {
+public:
+	DoWhileLoopAdder(string name) : LoopAdder(name) { }
+	virtual int calculate() {
+		int tmp = 0;
+		int i = getX();
+		do {
+			tmp += i;
+			i++;
+		} while (i <=getY());
+		return tmp;
+	}
+};
+
+int main() {
+	WhileLoopAdder whileLoop("While Loop");
+	DoWhileLoopAdder doWhileLoop("Do while Loop");
+
+	whileLoop.run();
+	doWhileLoop.run();
+}
 ```
