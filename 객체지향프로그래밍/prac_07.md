@@ -589,3 +589,107 @@ int main() {
 	b.show();
 }
 ```
+
+### 8번
+```
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Circle {
+	int radius;
+public:
+	Circle(int radius = 0) { this->radius = radius; }
+	void show() { cout << "radius = " << radius << " 인 원" << endl; }
+	Circle& operator++ () {
+		radius += 1;
+		return *this;
+	}
+	Circle operator++(int x) {
+		Circle tmp = *this;
+		this->radius += 1;
+		return tmp;
+	}
+};
+
+int main() {
+	Circle a(5), b(4);
+	++a;
+	b = a++;
+	a.show();
+	b.show();
+}
+```
+
+### 9번
+```
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Circle {
+	int radius;
+public:
+	Circle(int radius = 0) { this->radius = radius; }
+	void show() { cout << "radius = " << radius << " 인 원" << endl; }
+	friend Circle operator+(int x, Circle c1);
+};
+
+Circle operator+(int x, Circle c1) {
+	Circle tmp;
+	tmp.radius = c1.radius + x;
+	return tmp;
+}
+
+int main() {
+	Circle a(5), b(4);
+	b = 1 + a;
+	a.show();
+	b.show();
+}
+```
+
+### 10번
+```
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Statistics {
+	int* data;
+	int size;
+public:
+	Statistics() { data = new int[100]; this->size = 0; }
+
+	bool operator!() { return (size == NULL); }
+	Statistics& operator<<(int x) { this->data[size++] = x;		return *this;  }
+	Statistics operator>>(int& x) {
+		for (int i = 0; i < size; i++)
+			x += data[i];
+		x = x / size;
+		return *this;
+	}
+	void operator~() {
+		for (int i = 0; i < size; i++)
+			cout << data[i] << ' ';
+		cout << endl;
+	}
+};
+
+int main() {
+	Statistics stat;
+	if (!stat) cout << "현재 통계 데이터가 없습니다." << endl;
+
+	int x[5];
+	cout << "5 개의 정수를 입력하라>>";
+	for (int i = 0; i < 5; i++) cin >> x[i];
+	
+	for (int i = 0; i < 5; i++) stat << x[i];
+	stat << 100 << 200;
+	~stat;
+
+	int avg = 0;
+	stat >> avg;
+	cout << "avg=" << avg << endl;
+}
+```
