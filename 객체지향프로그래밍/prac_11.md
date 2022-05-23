@@ -48,25 +48,56 @@ int main() {
 using namespace std;
 
 int main() {
-	int count = 0;
-	char ch;
+	int ch;
 
-	while (true) {
-		cin.get(ch);
-		if (cin.eof())
-			break;
-	
+	cin.ignore(100, ';');
+	while ((ch = cin.get()) != EOF) {
+		cout.put(ch);
 		if (ch == '\n')
-			break;
-
-		if (ch == ' ')
-			count++;
+			cin.ignore(100, ';');
 	}
-	cout << " ' '의 갯수는 " << count << endl;
 }
 ```
 
 ### 4번
+```
+#include <iostream>
+using namespace std;
+
+int main() {
+	int ch;
+
+	while ((ch = cin.get()) != EOF) {
+		if (ch == ';') {
+			cout.put('\n');
+			cin.ignore(100, '\n');
+		}
+		else
+			cout.put(ch);
+	}
+}
+```
+
+### 5번
+```
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+	string cmd;
+	while (true) {
+		cout << "종료할려면 exit을 입력하세요 >> ";
+		getline(cin, cmd);
+		if (cmd == "exit") {
+			cout << "프로그램을 종료합니다....";
+			return 0;
+		}
+	}
+}
+```
+
+### 6번
 ```
 
 ```
