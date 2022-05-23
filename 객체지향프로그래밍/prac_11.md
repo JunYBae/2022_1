@@ -99,5 +99,39 @@ int main() {
 
 ### 6번
 ```
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+
+void showNumber(const double& num) {
+	cout << setw(15) << setfill('_') << num;
+}
+
+void showSqrt(const double& num) {
+	cout << setprecision(3) << setw(15) << setfill('_') << sqrt(num) << endl;
+}
+
+int main() {
+	cout.setf(ios::left);
+	cout << setw(15) << "Number";
+	cout << setw(15) << "Square";
+	cout << setw(15) << "Square Root" << endl;
+	for (int i = 0; i <= 45; i = i + 5) {
+		cout.precision(4);
+		cout << setw(15) << setfill('_') << i;
+		cout << setw(15) << setfill('_') << i*i;
+		cout << setprecision(3) << setw(15) << setfill('_') << sqrt(i) << endl;
+	}
+}
+```
+
+### 7번
+```
+
+```
+
+### 8번
+```
 
 ```
