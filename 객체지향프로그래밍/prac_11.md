@@ -169,5 +169,85 @@ int main() {
 
 ### 9번
 ```
+#include <iostream>
+using namespace std;
 
+class Phone {
+	string name;
+	string telnum;
+	string address;
+public:
+	Phone(string name = "", string telnum = "", string address = "") {
+		this->name = name;
+		this->telnum = telnum;
+		this->address = address;
+	}
+	friend istream& operator>> (istream& ins, Phone& a);
+	friend ostream& operator<< (ostream& outs, Phone a);
+};
+
+istream& operator>> (istream& ins, Phone& a) {
+	cout << "이름:";
+	ins >> a.name;
+	cout << "전화번호:";
+	ins >> a.telnum;
+	cout << "주소:";
+	ins >> a.address;
+	return ins;
+}
+
+ostream& operator<< (ostream& outs, Phone a) {
+	outs << "(" << a.name << "," << a.telnum << "," << a.address << ")";
+	return outs;
+}
+
+int main() {
+	Phone girl, boy;
+	cin >> girl >> boy;
+	cout << girl << endl << boy << endl;
+}
+```
+
+### 10번
+```
+#include <iostream>
+#include <string>
+using namespace std;
+
+istream& prompt(istream& ins) {
+	cout << "암호?";
+	return ins;
+}
+
+int main() {
+	string password;
+	while (true) {
+		cin >> prompt >> password;
+		if (password == "C++") {
+			cout << "login success!!" << endl;
+			break;
+		}
+		else
+			cout << "login fail. try again!!" << endl;
+	}
+}
+```
+
+### 11번
+```
+#include <iostream>
+#include <string>
+using namespace std;
+
+istream& pos(istream& ins) {
+	cout << "위치는?";
+	return ins;
+}
+
+int main() {
+	int x, y;
+	cin >> pos >> x;
+	cin >> pos >> y;
+	cout << x << ',' << y << endl;
+}
 ```
