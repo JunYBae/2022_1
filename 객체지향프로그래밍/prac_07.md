@@ -693,3 +693,90 @@ int main() {
 	cout << "avg=" << avg << endl;
 }
 ```
+
+### 11번
+```
+```
+
+### 12번
+```
+#include <iostream>
+#include <string>
+using namespace std;
+
+class SortedArray {
+    int size; // 현재 배열의 크기 
+    int* p; // 정수 배열에 대한 포인터 
+    void sort() {
+        int i, j, key;
+        for (i = 1; i < size; i++) {
+            key = p[i];
+            for (j = i - 1; j >= 0 && p[j] > key; j--)
+                p[j + 1] = p[j];
+            p[j + 1] = key;
+        }
+    }// 정수 배열을 오름차순으로 정렬 
+public:
+    SortedArray() {
+        p = NULL; size = 0;
+    }// p는 NULL로 size는 0으로 초기화 
+    SortedArray(SortedArray& src) {
+        size = src.size;
+        p = new int[size];
+        for (int i = 0; i < size; i++)
+            p[i] = src.p[i];
+    }// 복사 생성자 
+    SortedArray(int p[], int size) {
+        this->size = size;
+        this->p = new int[size];
+        for (int i = 0; i < size; i++)
+            this->p[i] = p[i];
+        sort();
+    }// 생성자. 정수 배열과 크기를 전달받음 
+    ~SortedArray() {
+        delete[] p;
+    }// 소멸자 
+    SortedArray operator+ (SortedArray& op2) {
+        SortedArray tmp;
+        tmp.size = size + op2.size;
+        tmp.p = new int[tmp.size];
+        int i = 0;
+        for (i = 0; i < size; i++)
+            tmp.p[i] = p[i];
+        for (int j = 0; j < op2.size; j++)
+            tmp.p[i++] = op2.p[j];
+        tmp.sort();
+        return tmp;
+    }// 현재 배열에 op2 배열 추가 
+    SortedArray& operator= (const SortedArray& op2) {
+        delete[] p;
+        this->size = op2.size;
+        this->p = new int[size];
+        for (int i = 0; i < size; i++)
+            p[i] = op2.p[i];
+        return *this;
+    }// 현재 배열에 op2 배열 복사 
+    void show() {
+        cout << "배열 출력 : ";
+        for (int i = 0; i < size; i++)
+            cout << p[i] << " ";
+        cout << endl;
+    }// 배열의 원소 출력 
+};
+
+
+
+
+int main() {
+    int n[] = { 2, 20, 6 };
+    int m[] = { 10, 7, 8, 30 };
+    SortedArray a(n, 3), b(m, 4), c;
+
+    c = a + b; // +, = 연산자 작성 필요
+    // + 연산자가 SortedArray 객체를 리턴하므로 복사 생성자 필요
+
+    a.show();
+    b.show();
+    c.show();
+}
+```
