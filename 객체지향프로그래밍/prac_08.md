@@ -278,3 +278,64 @@ int main() {
 	cout << endl << "스택의 현재 크기 : " << mStack.length() << endl;
 }
 ```
+
+### 7번
+```
+#include <iostream>
+#include <string>
+using namespace std;
+
+class BaseMemory {
+    char* mem;
+protected:
+    BaseMemory(int size) { mem = new char[size]; }
+    void mem_set(char* x) {
+        mem = x;
+    }
+    char mem_read(int index) {
+        return mem[index];
+    }
+    void mem_write(int index, char data) {
+        mem[index] = data;
+    }
+};
+
+class ROM : public BaseMemory {
+    int size;
+public:
+    ROM(int size, char x[], int x_size) : BaseMemory(size) {
+        this->size = size;
+        mem_set(x);
+    }
+    char read(int index) {
+        return mem_read(index);
+    }
+};
+
+class RAM : public BaseMemory {
+    int size;
+public:
+    RAM(int size) : BaseMemory(size) {
+        this->size = size;
+    }
+    void write(int index, char data) {
+        mem_write(index, data);
+    }
+    char read(int index) {
+        return mem_read(index);
+    }
+};
+
+
+
+
+int main() {
+    char x[5] = { 'h', 'e', 'l', 'l', 'o' };
+    ROM biosROM(1024 * 10, x, 5); // 10KB의 ROM 메모리. 배열 x로 초기화됨 
+    RAM mainMemory(1024 * 1024); // 1MB의 ROM 메모리 
+
+    // 0 번지에서 4번지까지 biosRom에서 읽어 mainMemory에 복사 
+    for (int i = 0; i < 5; i++) mainMemory.write(i, biosROM.read(i));
+    for (int i = 0; i < 5; i++) cout << mainMemory.read(i);
+}
+```
